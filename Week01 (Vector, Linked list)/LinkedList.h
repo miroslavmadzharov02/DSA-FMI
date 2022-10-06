@@ -24,6 +24,8 @@ public:
 	LinkedList(const LinkedList& other);
 	~LinkedList();
 
+	const size_t getSize() const;
+
 	void insertLast(const T& elem);
 	void updateAt(const size_t& index, const T& elem);
 	void removeAt(const size_t& index);

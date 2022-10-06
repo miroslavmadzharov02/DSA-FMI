@@ -52,6 +52,12 @@ inline LinkedList<T>::~LinkedList()
 }
 
 template<typename T>
+inline const size_t LinkedList<T>::getSize() const
+{
+	return size_;
+}
+
+template<typename T>
 inline void LinkedList<T>::insertLast(const T& elem)
 {
 	Node* nodeToAdd = new Node(elem);
@@ -81,6 +87,11 @@ inline void LinkedList<T>::updateAt(const size_t& index, const T& elem)
 template<typename T>
 inline void LinkedList<T>::removeAt(const size_t& index)
 {
+	if (index >= size_)
+		throw std::exception("Value to remove is out of bounds.\n");
+
+	--size_;
+
 	if (!index)
 	{
 		Node* tempFirst = first_;
