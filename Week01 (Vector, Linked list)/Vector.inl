@@ -83,7 +83,44 @@ void Vector<T>::pushBack(const T elem)
 }
 
 template<typename T>
-inline bool Vector<T>::doesExist(const T& valueToSeek)
+void Vector<T>::popBack()
+{
+	if (!size_)
+		return;
+
+	container_[size_ - 1].~T();
+	--size_;
+}
+
+template<typename T>
+void Vector<T>::popAtIndex(const size_t& index)
+{
+	if (index >= size_)
+		throw std::exception("Index to remove out of bounds.\n");
+
+	if (index == size_ - 1)
+	{
+		popBack();
+		return;
+	}
+
+	container_[index].~T();
+	for (size_t i = index; i < size_ - 1; i++)
+		container_[i] = container_[i + 1];
+	--size_;
+}
+
+template<typename T>
+void Vector<T>::updateAtIndex(const size_t& index, const T& elem)
+{
+	if (index >= size_)
+		throw std::exception("Index to update out of bounds.\n");
+
+	container_[index] = elem;
+}
+
+template<typename T>
+bool Vector<T>::doesExist(const T& valueToSeek)
 {
 	for (size_t i = 0; i < size_; i++)
 		if (valueToSeek == container_[i])
@@ -106,7 +143,7 @@ template<typename T>
 T& Vector<T>::operator[](const size_t& index) const
 {
 	if (index < 0 || index >= size_)
-		throw "Index out of range";
+		throw std::exception("Index out of range");
 
 	return container_[index];
 }

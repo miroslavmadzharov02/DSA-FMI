@@ -21,6 +21,9 @@ public:
 	const size_t getSize() const;
 	const size_t getCapacity() const;
 	void pushBack(const T elem);
+	void popBack();
+	void popAtIndex(const size_t& index);
+	void updateAtIndex(const size_t& index, const T& elem);
 	bool doesExist(const T& valueToSeek);
 
 	Vector<T>& operator=(const Vector<T>& other);
