@@ -85,7 +85,7 @@ void Vector<T>::pushBack(const T elem)
 template<typename T>
 void Vector<T>::popBack()
 {
-	if (!size_)
+	if (size_ == 0)
 		return;
 
 	container_[size_ - 1].~T();
@@ -142,7 +142,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& other)
 template<typename T>
 T& Vector<T>::operator[](const size_t& index) const
 {
-	if (index < 0 || index >= size_)
+	if (index >= size_)
 		throw std::exception("Index out of range");
 
 	return container_[index];
