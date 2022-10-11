@@ -62,7 +62,7 @@ inline void LinkedList<T>::insertLast(const T& elem)
 {
 	Node* nodeToAdd = new Node(elem);
 
-	if (!size_)
+	if (size_ == 0)
 	{
 		first_ = last_ = nodeToAdd;
 		++size_;
@@ -92,7 +92,7 @@ inline void LinkedList<T>::removeAt(const size_t& index)
 
 	--size_;
 
-	if (!index)
+	if (index == 0)
 	{
 		Node* tempFirst = first_;
 		first_ = tempFirst->next_;
