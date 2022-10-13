@@ -26,10 +26,9 @@ public:
 
 	const size_t getSize() const;
 
-	void insertLast(const T& elem);
+	void pushBack(const T& elem);
 	void updateAt(const size_t& index, const T& elem);
-	void removeAt(const size_t& index);
-	void print();
+	void popAt(const size_t& index);
 
 	T operator[](const size_t& index) const;
 };

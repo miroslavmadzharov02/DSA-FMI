@@ -17,7 +17,7 @@ inline void LinkedList<T>::copy(const LinkedList& other)
 	Node* current = other.head_;
 	while (current)
 	{
-		insertLast(current->data_);
+		pushBack(current->data_);
 		current = current->next_;
 	}
 }
@@ -58,7 +58,7 @@ inline const size_t LinkedList<T>::getSize() const
 }
 
 template<typename T>
-inline void LinkedList<T>::insertLast(const T& elem)
+inline void LinkedList<T>::pushBack(const T& elem)
 {
 	Node* nodeToAdd = new Node(elem);
 
@@ -85,7 +85,7 @@ inline void LinkedList<T>::updateAt(const size_t& index, const T& elem)
 }
 
 template<typename T>
-inline void LinkedList<T>::removeAt(const size_t& index)
+inline void LinkedList<T>::popAt(const size_t& index)
 {
 	if (index >= size_)
 		throw std::exception("Value to remove is out of bounds.\n");
@@ -108,13 +108,6 @@ inline void LinkedList<T>::removeAt(const size_t& index)
 	Node* nodeToRemove = previousToNodeToRemove->next_;
 	previousToNodeToRemove->next_ = nodeToRemove->next_;
 	delete nodeToRemove;
-}
-
-template<typename T>
-inline void LinkedList<T>::print()
-{
-	for (Node* current = head_; current != nullptr; current = current->next_)
-		std::cout << current->data_ << ' ';
 }
 
 template<typename T>
