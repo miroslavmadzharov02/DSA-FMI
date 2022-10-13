@@ -13,8 +13,8 @@ private:
 		Node(const T& data, Node* next = nullptr);
 	};
 
-	Node* first_;
-	Node* last_;
+	Node* head_;
+	Node* tail_;
 	size_t size_;
 
 	void copy(const LinkedList& other);

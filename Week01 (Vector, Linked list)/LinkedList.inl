@@ -12,9 +12,9 @@ template<typename T>
 inline void LinkedList<T>::copy(const LinkedList& other)
 {
 	size_ = 0;
-	first_ = last_ = nullptr;
+	head_ = tail_ = nullptr;
 
-	Node* current = other.first_;
+	Node* current = other.head_;
 	while (current)
 	{
 		insertLast(current->data_);
@@ -25,17 +25,17 @@ inline void LinkedList<T>::copy(const LinkedList& other)
 template<typename T>
 inline void LinkedList<T>::del()
 {
-	while (first_ != nullptr)
+	while (head_ != nullptr)
 	{
-		Node* current = first_;
-		first_ = first_->next_;
+		Node* current = head_;
+		head_ = head_->next_;
 		delete current;
 	}
 }
 
 template<typename T>
 inline LinkedList<T>::LinkedList()
-	: first_(nullptr), last_(nullptr), size_(0)
+	: head_(nullptr), tail_(nullptr), size_(0)
 {
 }
 
@@ -62,22 +62,22 @@ inline void LinkedList<T>::insertLast(const T& elem)
 {
 	Node* nodeToAdd = new Node(elem);
 
-	if (size_ == 0)
+	if (!size_)
 	{
-		first_ = last_ = nodeToAdd;
+		head_ = tail_ = nodeToAdd;
 		++size_;
 		return;
 	}
 
-	last_->next_ = nodeToAdd;
-	last_ = nodeToAdd;
+	tail_->next_ = nodeToAdd;
+	tail_ = nodeToAdd;
 	++size_;
 }
 
 template<typename T>
 inline void LinkedList<T>::updateAt(const size_t& index, const T& elem)
 {
-	Node* current = first_;
+	Node* current = head_;
 
 	for (size_t i = 0; i < index; i++)
 		current = current->next_;
@@ -92,15 +92,15 @@ inline void LinkedList<T>::removeAt(const size_t& index)
 
 	--size_;
 
-	if (index == 0)
+	if (!index)
 	{
-		Node* tempFirst = first_;
-		first_ = tempFirst->next_;
-		delete tempFirst;
+		Node* tempHead = head_;
+		head_ = tempHead->next_;
+		delete tempHead;
 		return;
 	}
 
-	Node* previousToNodeToRemove = first_;
+	Node* previousToNodeToRemove = head_;
 
 	for (size_t i = 0; i < index - 1; i++)
 		previousToNodeToRemove = previousToNodeToRemove->next_;
@@ -113,14 +113,14 @@ inline void LinkedList<T>::removeAt(const size_t& index)
 template<typename T>
 inline void LinkedList<T>::print()
 {
-	for (Node* current = first_; current != nullptr; current = current->next_)
+	for (Node* current = head_; current != nullptr; current = current->next_)
 		std::cout << current->data_ << ' ';
 }
 
 template<typename T>
 inline T LinkedList<T>::operator[](const size_t& index) const
 {
-	Node* current = first_;
+	Node* current = head_;
 	size_t count = index;
 
 	while (current != nullptr && count-- > 0)
