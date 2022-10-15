@@ -15,7 +15,6 @@ private:
 
 	Node* head_;
 	Node* tail_;
-	size_t size_;
 
 	void copy(const LinkedList& other);
 	void del();
