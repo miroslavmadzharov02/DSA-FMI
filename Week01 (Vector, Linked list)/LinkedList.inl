@@ -11,7 +11,6 @@ inline LinkedList<T>::Node::Node(const T& data, Node* next)
 template<typename T>
 inline void LinkedList<T>::copy(const LinkedList& other)
 {
-	size_ = 0;
 	head_ = tail_ = nullptr;
 
 	Node* current = other.head_;
@@ -35,7 +34,7 @@ inline void LinkedList<T>::del()
 
 template<typename T>
 inline LinkedList<T>::LinkedList()
-	: head_(nullptr), tail_(nullptr), size_(0)
+	: head_(nullptr), tail_(nullptr)
 {
 }
 
@@ -54,7 +53,16 @@ inline LinkedList<T>::~LinkedList()
 template<typename T>
 inline const size_t LinkedList<T>::getSize() const
 {
-	return size_;
+	size_t count = 0;
+
+	Node* current = head_;
+	while (current != nullptr)
+	{
+		current = current->next_;
+		count++;
+	}
+
+	return count;
 }
 
 template<typename T>
@@ -62,16 +70,14 @@ inline void LinkedList<T>::pushBack(const T& elem)
 {
 	Node* nodeToAdd = new Node(elem);
 
-	if (!size_)
+	if (head_ == nullptr)
 	{
 		head_ = tail_ = nodeToAdd;
-		++size_;
 		return;
 	}
 
 	tail_->next_ = nodeToAdd;
 	tail_ = nodeToAdd;
-	++size_;
 }
 
 template<typename T>
@@ -87,12 +93,10 @@ inline void LinkedList<T>::updateAt(const size_t& index, const T& elem)
 template<typename T>
 inline void LinkedList<T>::popAt(const size_t& index)
 {
-	if (index >= size_)
+	if (index >= getSize())
 		throw std::exception("Value to remove is out of bounds.\n");
 
-	--size_;
-
-	if (!index)
+	if (index == 0)
 	{
 		Node* tempHead = head_;
 		head_ = tempHead->next_;
