@@ -14,7 +14,7 @@ inline void LinkedList<T>::copy(const LinkedList& other)
 	head_ = tail_ = nullptr;
 
 	Node* current = other.head_;
-	while (current)
+	while (current != nullptr)
 	{
 		pushBack(current->data_);
 		current = current->next_;
@@ -198,9 +198,9 @@ inline T LinkedList<T>::popAfterNode(Node* iterator)
 
 	Node* nodeToPop = iterator->next_;
 	iterator->next_ = nodeToPop->next_;
-	
+
 	const T dataCopy = nodeToPop->data_;
 	delete nodeToPop;
-	
+
 	return dataCopy;
 }

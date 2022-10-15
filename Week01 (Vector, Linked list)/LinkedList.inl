@@ -14,7 +14,7 @@ inline void LinkedList<T>::copy(const LinkedList& other)
 	head_ = tail_ = nullptr;
 
 	Node* current = other.head_;
-	while (current)
+	while (current != nullptr)
 	{
 		pushBack(current->data_);
 		current = current->next_;
