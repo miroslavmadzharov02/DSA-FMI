@@ -91,7 +91,7 @@ size_t TreeMethods::sizeBinaryTree(Node* root)
 size_t TreeMethods::heightBinaryTree(Node* root)
 {
 	if (root == nullptr)
-		return 0;
+		return -1;
 
 	size_t leftHeight = heightBinaryTree(root->left);
 	size_t rightHeight = heightBinaryTree(root->right);
